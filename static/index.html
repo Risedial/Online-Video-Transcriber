@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Video Transcriber</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Video Transcriber</h1>
+      <p class="subtitle">Paste URLs → get Markdown transcripts</p>
+    </header>
+
+    <main>
+      <!-- URL Input -->
+      <section class="card" id="input-section">
+        <label for="url-input">
+          Video URLs
+          <span class="url-count" id="url-count"></span>
+        </label>
+        <textarea
+          id="url-input"
+          placeholder="Paste one URL per line, or separate with commas&#10;&#10;https://youtube.com/watch?v=...&#10;https://youtube.com/watch?v=..."
+          rows="6"
+          spellcheck="false"
+        ></textarea>
+
+        <!-- Output Folder -->
+        <div class="row">
+          <div class="field grow">
+            <label for="output-dir">Output Folder</label>
+            <input
+              type="text"
+              id="output-dir"
+              placeholder="C:\Users\You\Transcripts"
+              spellcheck="false"
+            />
+          </div>
+          <button class="btn-secondary" id="browse-btn" type="button">Browse</button>
+        </div>
+
+        <!-- Model -->
+        <div class="row">
+          <div class="field">
+            <label for="model-select">Whisper Model</label>
+            <select id="model-select">
+              <option value="tiny" selected>tiny (fastest, less accurate)</option>
+              <option value="base">base (balanced)</option>
+              <option value="small">small (slower, more accurate)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+          <button class="btn-primary" id="start-btn" type="button" disabled>
+            Start Transcription
+          </button>
+          <button class="btn-danger" id="cancel-btn" type="button" disabled>
+            Cancel
+          </button>
+        </div>
+      </section>
+
+      <!-- Progress -->
+      <section class="card hidden" id="progress-section">
+        <div class="section-header">
+          <h2>Progress</h2>
+          <span class="badge" id="progress-badge"></span>
+        </div>
+        <ul id="url-list" class="url-list"></ul>
+      </section>
+
+      <!-- Summary -->
+      <section class="card hidden" id="summary-section">
+        <div class="summary" id="summary-box"></div>
+      </section>
+
+      <!-- Log -->
+      <section class="card" id="log-section">
+        <div class="section-header">
+          <h2>Log</h2>
+          <button class="btn-ghost" id="clear-log-btn" type="button">Clear</button>
+        </div>
+        <div class="log-box" id="log-box">
+          <p class="log-placeholder">Activity will appear here...</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
